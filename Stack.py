@@ -36,7 +36,6 @@ class Stack:
 
 
 
-
 my_stack = Stack(4)
 my_stack.push(5)
 my_stack.push(6)
