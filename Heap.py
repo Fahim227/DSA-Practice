@@ -65,6 +65,59 @@ class MaxHeap:
                 return
 
 
+class MinHeap:
+    def __init__(self):
+        self.heap = []
+
+    def _left_child_index(self,index):
+        return 2 * index + 1
+    
+    def _right_child_index(self,index):
+        return 2 * index + 2
+    
+    def _parent_index(self,index):
+        return (index - 1) // 2
+    
+    def _swap(self,index1,index2):
+        self.heap[index1], self.heap[index2] = self.heap[index2], self.heap[index1]
+
+    def insert(self,value):
+        self.heap.append(value)
+        current = len(self.heap) - 1
+
+        while current > 0 and self.heap[current] < self.heap[self._parent_index(current)]:
+            self._swap(current, self._parent_index(current))
+            current = self._parent_index(current)
+    
+    def remove(self):
+        if len(self.heap) == 0:
+            return None
+        if len(self.heap) == 1:
+            return self.heap.pop()
+        min_value = self.heap[0]
+        self.heap[0] = self.heap.pop()
+        self._sink_down(0)
+        return min_value
+    
+    def _sink_down(self,index):
+        min_index = index
+        while True:
+            left = self._left_child_index(index)
+            right = self._right_child_index(index)
+
+            if left<len(self.heap) and self.heap[left] < self.heap[min_index]:
+                min_index = left
+            
+            if right<len(self.heap) and self.heap[right] < self.heap[min_index]:
+                min_index = right
+            
+            if min_index != index:
+                self._swap(min_index,index)
+                index = min_index
+            else :
+                return
+
+
 myHeap = MaxHeap()
 myHeap.insert(99)
 myHeap.insert(72)
