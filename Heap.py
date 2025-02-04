@@ -52,10 +52,10 @@ class MaxHeap:
             left = self._left_child_index(index)
             right = self._right_child_index(index)
 
-            if left<(len(self.heap)-1) and self.heap[left] > self.heap[max]:
+            if left<len(self.heap) and self.heap[left] > self.heap[max]:
                 max = left
             
-            if right<(len(self.heap)-1) and self.heap[right] > self.heap[max]:
+            if right<len(self.heap) and self.heap[right] > self.heap[max]:
                 max = right
             
             if max != index:
